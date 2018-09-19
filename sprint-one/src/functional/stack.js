@@ -1,5 +1,5 @@
-var Stack = function() {
-  var someInstance = {};
+const Stack = function() {
+  let someInstance = {};
 
   // Use an object with numeric keys to store values
   someInstance.storage = {};
