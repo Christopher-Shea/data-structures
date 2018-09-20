@@ -2,8 +2,8 @@
 
 // Instantiate a new graph
 const Graph = function() {
-  let vertices = {};
-  let edges = [];
+  this.vertices = {};
+  this.edges = [];
 };
 
 // Add a node to the graph, passing in the node's value.
@@ -22,7 +22,10 @@ Graph.prototype.removeNode = function(node) {
     delete this.vertices[node];
   }
   for (var i = 0; i < this.edges.length; i++) {
-     
+     if (node in this.edges[i]) {
+       this.edges.splice(i, 1);
+       break;
+     }
   }
 };
 
@@ -53,6 +56,9 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  Object.keys(this.vertices).forEach(function(key) {
+    cb(this.vertices[key]);
+  });
 };
 
 /*
