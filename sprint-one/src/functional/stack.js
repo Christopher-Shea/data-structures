@@ -1,10 +1,9 @@
 const Stack = function() {
   let someInstance = {};
 
-  // Use an object with numeric keys to store values
   someInstance.storage = {};
   someInstance.index = 0;
-  // Implement the methods below
+
   someInstance.push = function(value) {
     someInstance.index++;
     someInstance.storage[someInstance.index] = value;

@@ -1,10 +1,8 @@
 const Queue = function() {
   let someInstance = {};
 
-  // Use an object with numeric keys to store values
   someInstance.storage = {};
   someInstance.index = 0;
-  // Implement the methods below
 
   someInstance.enqueue = function(value) {
     someInstance.index++;

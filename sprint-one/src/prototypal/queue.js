@@ -1,7 +1,9 @@
 const Queue = function() {
   let someInstance = Object.create(queueMethods);
+
   someInstance.storage = {};
   someInstance.index = 0;
+  
   return someInstance;
 };
 
