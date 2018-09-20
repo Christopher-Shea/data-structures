@@ -14,7 +14,7 @@ queueMethods.enqueue = function(value) {
 
 queueMethods.dequeue = function() {
   let popped = this.storage[1];
-  for (var i = 1; i < this.index; i++) {
+  for (let i = 1; i < this.index; i++) {
     this.storage[i] = this.storage[i + 1];
     delete this.storage[i + 1];
   }
