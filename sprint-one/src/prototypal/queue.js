@@ -1,8 +1,27 @@
-var Queue = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
+const Queue = function() {
+  let someInstance = Object.create(queueMethods);
+  someInstance.storage = {};
+  someInstance.index = 0;
+  return someInstance;
 };
 
-var queueMethods = {};
+const queueMethods = {};
 
+queueMethods.enqueue = function(value) {
+  this.index++;
+  this.storage[this.index] = value;
+};
 
+queueMethods.dequeue = function() {
+  let popped = this.storage[1];
+  for (var i = 1; i < this.index; i++) {
+    this.storage[i] = this.storage[i + 1];
+    delete this.storage[i + 1];
+  }
+  this.index = Math.max(this.index - 1, 0);
+  return popped;
+};
+
+queueMethods.size = function() {
+  return this.index;
+};
