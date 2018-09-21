@@ -5,7 +5,6 @@ const HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   let index = getIndexBelowMaxForKey(k, this._limit);
-  let overwritten = false;
   if (!this._storage.get(index)) {
     this._storage.set(index, {[k]: v});
   } else {
