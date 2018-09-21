@@ -1,4 +1,4 @@
-const LinkedList = function() {
+const DoublyLinkedList = function() {
   let list = {};
   list.head = null;
   list.tail = null;
@@ -23,6 +23,7 @@ const LinkedList = function() {
       list.tail.next = newNode;
     }
     list.tail = newNode;
+  
   };
 
   list.removeHead = function() {
@@ -34,6 +35,17 @@ const LinkedList = function() {
       list.head = (list.head.next) ? list.head.next : null;
       return popped;
     }
+  };
+
+  list.removeTail = function() {
+    // if (list.head) {
+    //   let popped = list.head.value;
+    //   if (list.head.next === null) {
+    //     list.tail = null;
+    //   }
+    //   list.head = (list.head.next) ? list.head.next : null;
+    //   return popped;
+    // }
   };
 
   list.insert = function(parentValue, value) {
@@ -72,6 +84,7 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
+  node.previous = null;
 
   return node;
 };
@@ -84,17 +97,3 @@ var Node = function(value) {
  addToHead - O(1)
  insert - O(n)
 */
-
-// USING A HELPER FUNCTION FOR CONTAINS
-  // list.contains = function(target) {
-  //   let checkNext = function(nextNode) {
-  //     if (nextNode.value === target) {
-  //       return true;
-  //     }
-  //     if (nextNode.next) {
-  //       return checkNext(nextNode.next)
-  //     }
-  //     return false;
-  //   }
-  //   return checkNext(list.head);
-  // };
