@@ -34,23 +34,17 @@ const LinkedList = function() {
     return false;
   };
 
-    // USING A HELPER FUNCTION
-    // let checkNext = function(nextNode) {
-    //   if (nextNode.value === target) {
-    //     return true;
-    //   }
-    //   if (nextNode.next) {
-    //     return checkNext(nextNode.next)
-    //   }
-    //   return false;
-    // }
-    // return checkNext(list.head);
-
-    // POSSIBLE DIRECT RECURSIVE CALL USING FUNCTION.CALL()?
-    //let currentNode = (list.head) ? list.head : list; 
-    // if (currentNode.next) {
-    //   return list.contains.call(currentNode.next, target);
-    // }
+  // USING A HELPER FUNCTION
+  // let checkNext = function(nextNode) {
+  //   if (nextNode.value === target) {
+  //     return true;
+  //   }
+  //   if (nextNode.next) {
+  //     return checkNext(nextNode.next)
+  //   }
+  //   return false;
+  // }
+  // return checkNext(list.head);
   //};
 
   return list;
@@ -70,11 +64,12 @@ var Node = function(value) {
  addToTail - O(1)
  removeHead - O(1)
  contains - O(n)
- */
+*/
 
- /*
+/*
  Wishlist: 
  addToHead
  removeFromTail
  Insert
- */
+ double-linked
+*/

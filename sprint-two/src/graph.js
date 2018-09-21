@@ -1,48 +1,52 @@
-
-
-// Instantiate a new graph
 const Graph = function() {
   this.nodes = [];
   this.edges = [];
 };
 
-// Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
   this.nodes.push(node);
 };
 
-// Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
   return this.nodes.includes(node);
 };
 
-// Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   this.nodes = this.nodes.filter(x => x !== node);
   this.edges = this.edges.filter(edge => !(edge.includes(node)));
 };
 
-// Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
   return this.edges.some(edge => edge.includes(fromNode) && edge.includes(toNode));
 };
 
-// Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
   this.edges.push([fromNode, toNode]);
 };
 
-// Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
   this.edges = this.edges.filter(edge => !(edge.includes(fromNode) && edge.includes(toNode)));
 };
 
-// Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
   this.nodes.forEach(cb);
 };
 
 
+/*
+ * Complexity: What is the time complexity of the above functions?
+ * addNode - O(1)
+ * removeNode - O(n)
+ * contains - O(n)
+ * addEdge - O(1)
+ * removeEdge - O(n)
+ * hasEdge - O(n)
+ * forEachNode - O(n)
+ */
+
+
+
+// Written to better accomodate object nodes
 // const Graph = function() {
 //   this.vertices = {};
 //   this.edges = [];
@@ -106,9 +110,5 @@ Graph.prototype.forEachNode = function(cb) {
 //     cb(nodes[nodeKey]);
 //   });
 // };
-
-// /*
-//  * Complexity: What is the time complexity of the above functions?
-//  */
 
 
