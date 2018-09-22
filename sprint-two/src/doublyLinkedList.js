@@ -10,6 +10,7 @@ const DoublyLinkedList = function() {
     }
     if (list.head) {
       newNode.next = list.head;
+      list.head.previous = newNode;
     }
     list.head = newNode;
   };
@@ -20,10 +21,10 @@ const DoublyLinkedList = function() {
       list.head = newNode;
     }
     if (list.tail) {
+      newNode.previous = list.tail;
       list.tail.next = newNode;
     }
     list.tail = newNode;
-  
   };
 
   list.removeHead = function() {
@@ -31,6 +32,8 @@ const DoublyLinkedList = function() {
       let popped = list.head.value;
       if (list.head.next === null) {
         list.tail = null;
+      } else {
+        list.head.next.previous = null;
       }
       list.head = (list.head.next) ? list.head.next : null;
       return popped;
@@ -38,14 +41,16 @@ const DoublyLinkedList = function() {
   };
 
   list.removeTail = function() {
-    // if (list.head) {
-    //   let popped = list.head.value;
-    //   if (list.head.next === null) {
-    //     list.tail = null;
-    //   }
-    //   list.head = (list.head.next) ? list.head.next : null;
-    //   return popped;
-    // }
+    if (list.tail) {
+      let popped = list.tail.value;
+      if (list.tail.previous === null) {
+        list.head = null;
+      } else {
+        list.tail.previous.next = null;
+      }
+      list.tail = (list.tail.pervious) ? list.tail.previous : null;
+      return popped;
+    }
   };
 
   list.insert = function(parentValue, value) {
