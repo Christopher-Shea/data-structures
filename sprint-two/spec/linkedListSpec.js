@@ -82,5 +82,30 @@ describe('linkedList', function() {
     expect(linkedList.tail.value).to.equal(32);
   });
 
+  it('should remove the tail from the list when removeTail is called', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    expect(linkedList.tail.value).to.equal(5);
+    linkedList.removeTail();
+    expect(linkedList.head.value).to.equal(4);
+    expect(linkedList.tail.value).to.equal(4);
+    expect(linkedList.removeTail()).to.equal(4);
+    expect(linkedList.head).to.equal(null);
+    expect(linkedList.tail).to.equal(null);
+  });
+
+  it('should return the value of the former tail when removeTail is called', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.removeTail()).to.equal(4);
+  });
+
+  it('should remove a node at the correct position in the list', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    linkedList.addToTail(7);
+    linkedList.addToTail(9);
+    expect(linkedList.remove(5)).to.equal(5);
+    expect(linkedList.head.next.value).to.equal(7);
+  });
 
 });

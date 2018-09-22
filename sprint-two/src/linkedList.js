@@ -36,6 +36,42 @@ const LinkedList = function() {
     }
   };
 
+  list.removeTail = function() {
+    let parentNode = list.head;
+    let popped;
+    if (!parentNode.next) {
+      return list.removeHead();
+    }
+    while (parentNode.next.next) {
+      parentNode = parentNode.next;
+    }
+    popped = parentNode.next.value;
+    parentNode.next = null;
+    list.tail = parentNode;
+    return popped;
+  };
+
+  list.remove = function(removeValue) {
+    if (list.head.value === removeValue) {
+      return list.removeHead();
+    } else if (list.tail.value === removeValue) {
+      return list.removeTail();
+    }
+    let parentNode = list.head;
+    let popped;
+    while (parentNode.next.value !== removeValue) {
+      if (parentNode.next.next === null) {
+        return;
+      }
+      parentNode = parentNode.next;
+    }
+    popped = parentNode.next.value;
+    let garbageNode = parentNode.next;
+    parentNode.next = parentNode.next.next;
+    garbageNode.next = null;
+    return popped;
+  };
+
   list.insert = function(parentValue, value) {
     let newNode = Node(value);
     let parentNode = list.head;
