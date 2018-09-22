@@ -1,7 +1,6 @@
 const HashTable = function() {
   this._limit = 8;
   this._size = 0;
-  this._load = this._size/this._limit;
   this._storage = LimitedArray(this._limit);
 };
 
@@ -21,15 +20,17 @@ HashTable.prototype.insert = function(k, v) {
   }
   
   if (!set) {
-    for (let i = startIndex, j = this._limit; i < j; i++) {
+    for (let i = startIndex + 1, j = this._limit; i < j; i++) {
       if (!this._storage.get(i)) {
         this._storage.set(i, [k, v]);
         set = true;
         this._size++;
+        break;
       }
       if (this._storage.get(i)[0] === k) {
         this._storage.set(i, [k, v]);
         set = true;
+        break;
       }
     }
   }
@@ -40,16 +41,18 @@ HashTable.prototype.insert = function(k, v) {
         this._storage.set(i, [k, v]);
         set = true;
         this._size++;
+        break;
       }
       if (this._storage.get(i)[0] === k) {
         this._storage.set(i, [k, v]);
         set = true;
+        break;
       }
     }
   }
 
-  if (set && this._load >= 0.75) {
-    this.reHash();
+  if (set && (this._size / this._limit) >= 0.75) {
+    this.reSize();
   }
 };
 
@@ -87,7 +90,7 @@ HashTable.prototype.remove = function(k) {
   let startIndex = getIndexBelowMaxForKey(k, this._limit);
   let removed = false;
 
-  if (this._storage.get(startIndex)[0] === k) {
+  if (this._storage.get(startIndex) && this._storage.get(startIndex)[0] === k) {
     this._storage.set(startIndex, undefined);
     removed = true;
     this._size--;
@@ -95,7 +98,7 @@ HashTable.prototype.remove = function(k) {
   
   if (!removed) {
     for (let i = startIndex, j = this._limit; i < j; i++) {
-      if (this._storage.get(i)[0] === k) {
+      if (this._storage.get(startIndex) && this._storage.get(i)[0] === k) {
         this._storage.set(i, undefined);
         removed = true;
         this._size--;
@@ -105,7 +108,7 @@ HashTable.prototype.remove = function(k) {
 
   if (!removed) {
     for (let i = 0, j = startIndex; i < j; i++) {
-      if (this._storage.get(i)[0] === k) {
+      if (this._storage.get(startIndex) && this._storage.get(i)[0] === k) {
         this._storage.set(i, undefined);
         removed = true;
         this._size--;
@@ -113,14 +116,15 @@ HashTable.prototype.remove = function(k) {
     }
   }
 
-  if (removed && this._load <= 0.25) {
-    this.reHash();
+  if (removed && (this._size / this._limit) <= 0.25 && this._limit !== 8) {
+    this.reSize();
   }
 };
 
-HashTable.prototype.reHash = function() {
-  this._limit = (this.load < 0.5) ? this._limit / 2 : this._limit * 2;
-  
+HashTable.prototype.reSize = function() {
+  this._limit = (this._size / this._limit < 0.5) ? this._limit / 2 : this._limit * 2;
+  this._size = 0;
+
   this._oldStorage = this._storage;
   this._storage = LimitedArray(this._limit);
 
@@ -139,6 +143,7 @@ HashTable.prototype.reHash = function() {
  insert - O(1)
  retrieve - O(1)
  remove - O(1)
+ reSize - O(n)
  */
 
 
