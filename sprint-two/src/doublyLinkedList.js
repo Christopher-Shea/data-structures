@@ -32,10 +32,11 @@ const DoublyLinkedList = function() {
       let popped = list.head.value;
       if (list.head.next === null) {
         list.tail = null;
+        list.head = null;
       } else {
         list.head.next.previous = null;
+        list.head = list.head.next;
       }
-      list.head = (list.head.next) ? list.head.next : null;
       return popped;
     }
   };
@@ -45,10 +46,11 @@ const DoublyLinkedList = function() {
       let popped = list.tail.value;
       if (list.tail.previous === null) {
         list.head = null;
+        list.tail = null;
       } else {
         list.tail.previous.next = null;
+        list.tail = list.tail.previous;
       }
-      list.tail = (list.tail.pervious) ? list.tail.previous : null;
       return popped;
     }
   };
@@ -62,8 +64,15 @@ const DoublyLinkedList = function() {
       }
       parentNode = parentNode.next;
     }
+   
+    if (parentNode.next) {
+      parentNode.next.previous = newNode;
+    }
+
     newNode.next = parentNode.next;
     parentNode.next = newNode;
+    newNode.previous = parentNode;
+
     if (newNode.next === null) {
       this.tail = newNode;
     }
@@ -97,8 +106,9 @@ var Node = function(value) {
 /*
  * Complexity: What is the time complexity of the above functions?
  addToTail - O(1)
- removeHead - O(1)
- contains - O(n)
  addToHead - O(1)
+ removeHead - O(1)
+ removeTail - O(1)
+ contains - O(n)
  insert - O(n)
 */

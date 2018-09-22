@@ -82,5 +82,39 @@ describe('doublyLinkedList', function() {
     expect(doublyLinkedList.tail.value).to.equal(32);
   });
 
+  // add more tests here to test the functionality of doublyLinkedList
+  it('should remove the tail from the list when removeTail is called', function() {
+    doublyLinkedList.addToTail(3);
+    doublyLinkedList.addToTail(4);
+    doublyLinkedList.addToTail(5);
+    expect(doublyLinkedList.tail.value).to.equal(5);
+    doublyLinkedList.removeTail();
+    expect(doublyLinkedList.tail.value).to.equal(4);
+  });
 
+  it('should return the value of the former head when removeHead is called', function() {
+    doublyLinkedList.addToTail(3);
+    doublyLinkedList.addToTail(4);
+    doublyLinkedList.addToTail(5);
+    expect(doublyLinkedList.removeTail()).to.equal(5);
+  });
+
+  it('should properly maintain the previous property when calling methods on the list', function() {
+    doublyLinkedList.addToTail(3);
+    doublyLinkedList.addToTail(4);
+    doublyLinkedList.addToTail(7);
+    doublyLinkedList.addToTail(9);
+    expect(doublyLinkedList.head.previous).to.equal(null);
+    expect(doublyLinkedList.tail.previous.value).to.equal(7);
+    expect(doublyLinkedList.head.next.previous.value).to.equal(3);
+    doublyLinkedList.removeTail();
+    expect(doublyLinkedList.tail.previous.value).to.equal(4);
+    doublyLinkedList.removeTail();
+    doublyLinkedList.removeTail();
+    expect(doublyLinkedList.tail.previous).to.equal(null);
+    doublyLinkedList.addToHead(32);
+    expect(doublyLinkedList.tail.previous.value).to.equal(32);
+    doublyLinkedList.removeHead();
+    expect(doublyLinkedList.tail.previous).to.equal(null);
+  });
 });
