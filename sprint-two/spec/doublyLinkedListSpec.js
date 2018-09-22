@@ -117,4 +117,16 @@ describe('doublyLinkedList', function() {
     doublyLinkedList.removeHead();
     expect(doublyLinkedList.tail.previous).to.equal(null);
   });
+
+  it('should remove a node at the correct position in the list', function() {
+    doublyLinkedList.addToTail(4);
+    doublyLinkedList.addToTail(5);
+    doublyLinkedList.addToTail(7);
+    doublyLinkedList.addToTail(9);
+    expect(doublyLinkedList.remove(5)).to.equal(5);
+    expect(doublyLinkedList.head.next.value).to.equal(7);
+    expect(doublyLinkedList.head.next.previous.value).to.equal(4);
+    expect(doublyLinkedList.tail.previous.previous.value).to.equal(4);
+  });
+
 });

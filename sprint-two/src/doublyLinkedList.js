@@ -58,6 +58,7 @@ const DoublyLinkedList = function() {
   list.insert = function(parentValue, value) {
     let newNode = Node(value);
     let parentNode = list.head;
+
     while (parentNode.value !== parentValue) {
       if (parentNode.next === null) {
         return null;
@@ -76,6 +77,33 @@ const DoublyLinkedList = function() {
     if (newNode.next === null) {
       this.tail = newNode;
     }
+  };
+
+  list.remove = function(removeValue) {
+    if (list.head.value === removeValue) {
+      return list.removeHead();
+    } else if (list.tail.value === removeValue) {
+      return list.removeTail();
+    }
+
+    let parentNode = list.head;
+    let popped;
+
+    while (parentNode.next.value !== removeValue) {
+      if (parentNode.next.next === null) {
+        return;
+      }
+      parentNode = parentNode.next;
+    }
+
+    popped = parentNode.next.value;
+
+    parentNode.next.previous = null;
+    parentNode.next = parentNode.next.next;
+    parentNode.next.previous.next = null;
+    parentNode.next.previous = parentNode;
+
+    return popped;
   };
 
   list.contains = function(target) {
@@ -111,4 +139,5 @@ var Node = function(value) {
  removeTail - O(1)
  contains - O(n)
  insert - O(n)
+ remove - O(n)
 */

@@ -57,32 +57,40 @@ const LinkedList = function() {
     } else if (list.tail.value === removeValue) {
       return list.removeTail();
     }
+
     let parentNode = list.head;
     let popped;
+
     while (parentNode.next.value !== removeValue) {
       if (parentNode.next.next === null) {
         return;
       }
       parentNode = parentNode.next;
     }
+
     popped = parentNode.next.value;
     let garbageNode = parentNode.next;
+
     parentNode.next = parentNode.next.next;
     garbageNode.next = null;
+
     return popped;
   };
 
   list.insert = function(parentValue, value) {
     let newNode = Node(value);
     let parentNode = list.head;
+
     while (parentNode.value !== parentValue) {
       if (parentNode.next === null) {
         return null;
       }
       parentNode = parentNode.next;
     }
+
     newNode.next = parentNode.next;
     parentNode.next = newNode;
+    
     if (newNode.next === null) {
       this.tail = newNode;
     }
@@ -115,10 +123,12 @@ var Node = function(value) {
 /*
  * Complexity: What is the time complexity of the above functions?
  addToTail - O(1)
- removeHead - O(1)
- contains - O(n)
  addToHead - O(1)
+ removeHead - O(1)
+ removeTail - O(n)
+ contains - O(n)
  insert - O(n)
+ remove - O(n)
 */
 
 // USING A HELPER FUNCTION FOR CONTAINS
