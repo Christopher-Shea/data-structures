@@ -1,7 +1,7 @@
 # Data Structures
 This is a project I completed while a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
 
-Throughout the course of this project, my partner and I became familiar with the follwing common data structures and their associated methods:
+My partner and I implemented the follwing common data structures and associated methods:
 - Stacks
 - Queues
 - Linked Lists (singly and doubly-linked)
